@@ -1,0 +1,21 @@
+:root {
+    --primary-button: #3282f7;
+    --secondary-button: #68d9a4;
+    --tertiary-button: #ed6454;
+    --background-grey: #e7e7e7;
+    --background-grey-dark: #c7bebe;
+}
+
+html {
+    box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
