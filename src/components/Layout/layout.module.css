@@ -1,9 +1,9 @@
 .layout {
     padding: 2rem;
+    margin: auto;
+    max-width: 1440px;
 }
 
 .header {
-}
-
-.main {
+    margin-bottom: 2rem;
 }
