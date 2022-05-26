@@ -9,9 +9,16 @@ type GalleryProps = {
 function Gallery({ recipes }: GalleryProps) {
     return (
         <div className={styles.gallery}>
-            {recipes.map((recipe) => (
-                <Card key={recipe.id} recipe={recipe} />
-            ))}
+            {!recipes.length ? (
+                <div>
+                    « Aucune recette ne correspond à votre critère... vous
+                    pouvez chercher « tarte aux pommes », « poisson », etc.
+                </div>
+            ) : (
+                recipes.map((recipe) => (
+                    <Card key={recipe.id} recipe={recipe} />
+                ))
+            )}
         </div>
     );
 }

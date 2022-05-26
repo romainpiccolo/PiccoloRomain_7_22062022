@@ -12,7 +12,7 @@ function SearchInput({ setSearch }: SearchInputProps) {
                 type="text"
                 placeholder="Rechercher une recette"
                 className={styles.input}
-                onChange={(e) => setSearch(e.currentTarget.value)}
+                onChange={(e) => setSearch(e.currentTarget.value.trim())}
             />
 
             <img

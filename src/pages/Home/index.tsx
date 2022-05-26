@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 import Gallery from '../../components/Gallery';
 import IRecipe from '../../Interface/IRecipe';
 import ITags from '../../Interface/ITags';
+import {
+    filterRecipesByNameDescriptionAndIngredients,
+    extractTagsFromResults,
+} from '../../helper/filter';
 
 function Home() {
     const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
@@ -18,41 +22,32 @@ function Home() {
 
     useEffect(() => {
         if (search.length > 2) {
-            functionalFilterResult();
+            const result = filterRecipesByNameDescriptionAndIngredients(
+                recipes,
+                search
+            );
+
+            setFilterRecipes(result);
+            console.log(extractTagsFromResults(result));
+
             //TODO filter tag + change Tags
         } else {
             setFilterRecipes(recipes);
+            console.log(extractTagsFromResults(recipes));
+
+            setTags(extractTagsFromResults(recipes));
+
             // Reset tags
         }
     }, [search]);
-
-    const functionalFilterResult = () => {
-        let result = filterRecipes.filter((recipe) => {
-            return recipe.name.includes(search);
-        });
-
-        setFilterRecipes(result);
-    };
-
-    const functionalFilterTags = () => {
-        const tags: ITags = {
-            ingredients: [],
-            appliance: [],
-            ustensils: [],
-        };
-
-        filterRecipes.map((recipe) => {
-            recipe.ingredients.map((ingredient) => {});
-        });
-    };
 
     return (
         <>
             <div className={styles.home}>
                 <SearchInput setSearch={setSearch} />
-                <div>
+                {/* <div>
                     <CustomSelect />
-                </div>
+                </div> */}
                 <Gallery recipes={filterRecipes} />
             </div>
         </>

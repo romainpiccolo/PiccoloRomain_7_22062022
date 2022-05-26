@@ -1,12 +1,10 @@
+import IRecipeIngredient from "./IRecipeIngredient";
+
 export default interface IRecipe {
     id: number;
-    name: string
+    name: string;
     servings: number;
-    ingredients: Array<{
-        ingredient: string;
-        quantity?: number;
-        unit?: string;
-    }>;
+    ingredients: Array<IRecipeIngredient>;
     time: number;
     description: string;
     appliance: string;
