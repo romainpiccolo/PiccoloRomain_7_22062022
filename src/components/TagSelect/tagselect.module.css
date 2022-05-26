@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+}
+.input {
+    width: 170px;
+    height: 69px;
+    border-radius: 5px 0 0 5px;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.input::placeholder {
+    opacity: 1;
+}
+
+.icon {
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.blue {
+    background-color: var(--primary-button);
+}

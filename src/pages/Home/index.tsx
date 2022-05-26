@@ -1,4 +1,4 @@
-import CustomSelect from '../../components/CustomSelect/customselect';
+import TagSelect from '../../components/TagSelect';
 import SearchInput from '../../components/SearchInput';
 import styles from './home.module.css';
 import { recipes } from '../../datas/recipes';
@@ -6,21 +6,20 @@ import { useEffect, useState } from 'react';
 import Gallery from '../../components/Gallery';
 import IRecipe from '../../Interface/IRecipe';
 import ITags from '../../Interface/ITags';
-import {
-    filterRecipesByNameDescriptionAndIngredients,
-    extractTagsFromResults,
-} from '../../helper/filter';
+import { filterRecipesByNameDescriptionAndIngredients } from '../../helper/filter';
+import { extractTagsFromResults, getCachedTags } from '../../helper/tags';
 
 function Home() {
     const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
     const [search, setSearch] = useState<string>('');
-    const [tags, setTags] = useState<ITags>({
-        ingredients: [],
-        appliance: [],
-        ustensils: [],
-    });
+    const [defaultTags, setDefaultTags] = useState<ITags | undefined>();
+    const [tags, setTags] = useState<ITags | undefined>();
 
     useEffect(() => {
+        if (!defaultTags) {
+            setDefaultTags(getCachedTags(recipes));
+        }
+
         if (search.length > 2) {
             const result = filterRecipesByNameDescriptionAndIngredients(
                 recipes,
@@ -28,26 +27,24 @@ function Home() {
             );
 
             setFilterRecipes(result);
-            console.log(extractTagsFromResults(result));
-
-            //TODO filter tag + change Tags
+            setTags(extractTagsFromResults(result));
         } else {
             setFilterRecipes(recipes);
-            console.log(extractTagsFromResults(recipes));
-
-            setTags(extractTagsFromResults(recipes));
-
-            // Reset tags
+            setTags(defaultTags);
         }
     }, [search]);
+
+    useEffect(() => {
+        console.log(tags);
+    }, [tags]);
 
     return (
         <>
             <div className={styles.home}>
                 <SearchInput setSearch={setSearch} />
-                {/* <div>
-                    <CustomSelect />
-                </div> */}
+                <div>
+                    <TagSelect placeholder="Ingrédients" />
+                </div>
                 <Gallery recipes={filterRecipes} />
             </div>
         </>
