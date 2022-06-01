@@ -12,14 +12,10 @@ import { extractTagsFromResults, getCachedTags } from '../../helper/tags';
 function Home() {
     const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
     const [search, setSearch] = useState<string>('');
-    const [defaultTags, setDefaultTags] = useState<ITags | undefined>();
-    const [tags, setTags] = useState<ITags | undefined>();
+    const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
+    const [tags, setTags] = useState<ITags>(defaultTags);
 
     useEffect(() => {
-        if (!defaultTags) {
-            setDefaultTags(getCachedTags(recipes));
-        }
-
         if (search.length > 2) {
             const result = filterRecipesByNameDescriptionAndIngredients(
                 recipes,
@@ -43,9 +39,23 @@ function Home() {
             <div className={styles.home}>
                 <SearchInput setSearch={setSearch} />
                 <div className={styles.tagSelectWrapper}>
-                    <TagSelect placeholder="Ingrédients" />
-                    <TagSelect placeholder="Appareils" color="green" />
-                    <TagSelect placeholder="Ustensiles" color="red" />
+                    <TagSelect
+                        placeholder="Ingrédients"
+                        color="blue"
+                        tags={tags.ingredients}
+                    />
+
+                    <TagSelect
+                        placeholder="Appareils"
+                        color="green"
+                        tags={tags?.appliance}
+                    />
+
+                    <TagSelect
+                        placeholder="Ustensiles"
+                        color="red"
+                        tags={tags?.ustensils}
+                    />
                 </div>
                 <Gallery recipes={filterRecipes} />
             </div>

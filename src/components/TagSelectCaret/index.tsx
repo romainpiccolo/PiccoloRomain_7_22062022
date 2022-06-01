@@ -17,14 +17,14 @@ function TagSelectCaret({
     const arrowType = direction === 'down' ? arrowDown : arrowUp;
 
     return (
-        <>
+        <div className={styles.caretContainer}>
             <img
                 className={customClass}
                 src={arrowType}
                 alt={`Arrow ${direction}`}
                 onClick={handleClick}
             />
-        </>
+        </div>
     );
 }
 
