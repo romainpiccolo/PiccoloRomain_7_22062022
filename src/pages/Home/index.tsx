@@ -32,7 +32,7 @@ function Home() {
             setFilterRecipes(recipes);
             setTags(defaultTags);
         }
-    }, [search]);
+    }, [search, defaultTags]);
 
     useEffect(() => {
         console.log(tags);
@@ -42,8 +42,10 @@ function Home() {
         <>
             <div className={styles.home}>
                 <SearchInput setSearch={setSearch} />
-                <div>
+                <div className={styles.tagSelectWrapper}>
                     <TagSelect placeholder="Ingrédients" />
+                    <TagSelect placeholder="Appareils" color="green" />
+                    <TagSelect placeholder="Ustensiles" color="red" />
                 </div>
                 <Gallery recipes={filterRecipes} />
             </div>

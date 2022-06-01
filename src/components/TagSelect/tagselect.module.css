@@ -17,11 +17,12 @@
     opacity: 1;
 }
 
-.icon {
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
 .blue {
     background-color: var(--primary-button);
+}
+.green {
+    background-color: var(--secondary-button);
+}
+.red {
+    background-color: var(--tertiary-button);
 }

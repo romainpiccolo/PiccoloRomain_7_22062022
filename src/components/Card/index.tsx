@@ -34,10 +34,7 @@ function Card({ recipe }: { recipe: IRecipe }) {
                         ))}
                     </div>
                     <div className={styles.cardInfosDescription}>
-                        <span>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing
-                            elit. Sit, ratione!
-                        </span>
+                        {recipe.description}
                     </div>
                 </div>
             </div>

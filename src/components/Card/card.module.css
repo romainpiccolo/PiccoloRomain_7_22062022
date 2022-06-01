@@ -25,6 +25,13 @@
     font-size: 18px;
 }
 
+.cardTitle > div:first-child {
+    width: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .cardInfos {
     display: flex;
     justify-content: space-between;
@@ -34,6 +41,8 @@
 .cardInfosDescription {
     flex: 1;
     font-size: 12px;
+    overflow: hidden;
+    height: 110px;
 }
 
 .cardInfosIngredients > div > span:first-child {

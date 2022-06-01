@@ -1,5 +1,6 @@
 import styles from './tagselect.module.css';
-import arrowDown from '../../assets/arrow_down.svg';
+import { useState } from 'react';
+import TagSelectCaret from '../TagSelectCaret';
 
 type TagSelectProps = {
     placeholder: string;
@@ -7,7 +8,20 @@ type TagSelectProps = {
 };
 
 function TagSelect({ placeholder, color = 'blue' }: TagSelectProps) {
-    const styleColor = color === 'blue' ? styles.blue : '';
+    const [isOpen, setIsOpen] = useState(false);
+
+    let styleColor = styles.blue;
+
+    if (color === 'green') {
+        styleColor = styles.green;
+    }
+    if (color === 'red') {
+        styleColor = styles.red;
+    }
+
+    const handleClickOpen = () => {
+        setIsOpen(!isOpen);
+    };
 
     return (
         <div className={styles.container}>
@@ -16,10 +30,11 @@ function TagSelect({ placeholder, color = 'blue' }: TagSelectProps) {
                 type="text"
                 placeholder={placeholder}
             />
-            <img
-                className={styles.icon + ' ' + styleColor}
-                src={arrowDown}
-                alt="Arrow down"
+
+            <TagSelectCaret
+                direction={isOpen ? 'down' : 'up'}
+                color={color}
+                handleClick={handleClickOpen}
             />
         </div>
     );

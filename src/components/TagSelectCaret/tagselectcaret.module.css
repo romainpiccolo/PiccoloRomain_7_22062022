@@ -1,0 +1,23 @@
+.icon {
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    padding-right: 1rem;
+}
+
+.blue {
+    background-color: var(--primary-button);
+}
+.green {
+    background-color: var(--secondary-button);
+}
+.red {
+    background-color: var(--tertiary-button);
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
