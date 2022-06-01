@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import arrowDown from '../../assets/arrow_down.svg';
 import arrowUp from '../../assets/arrow_up.svg';
 import styles from './tagselectcaret.module.css';
