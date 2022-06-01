@@ -18,7 +18,8 @@ function TagSelect({ placeholder, color = 'blue', tags }: TagSelectProps) {
     useEffect(() => {
         setCurrentTags(tags);
         setIsOpen(false);
-    }, [tags]);
+        setCurrentPlaceholder(placeholder);
+    }, [tags, placeholder]);
 
     const handleClickOpen = () => {
         setIsOpen(!isOpen);
@@ -26,7 +27,9 @@ function TagSelect({ placeholder, color = 'blue', tags }: TagSelectProps) {
         isOpen
             ? setCurrentPlaceholder(placeholder)
             : setCurrentPlaceholder(
-                  'Rechercher un ' + singularize(placeholder).toLowerCase()
+                  'Rechercher un '
+                      .concat(' ', singularize(placeholder).toLowerCase())
+                      .concat(' (', String(currentTags.length), ')')
               );
     };
 
@@ -70,8 +73,6 @@ function TagSelect({ placeholder, color = 'blue', tags }: TagSelectProps) {
                 </div>
 
                 <div className={tagListClass}>
-                    <span>{currentTags.length}</span>
-
                     {currentTags.map((tag, index) => (
                         <Tag
                             key={index}
