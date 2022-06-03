@@ -14,6 +14,7 @@ function Home() {
     const [search, setSearch] = useState<string>('');
     const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
     const [tags, setTags] = useState<ITags>(defaultTags);
+    const [selectedTags, setSelectedTags] = useState([]);
 
     useEffect(() => {
         if (search.length > 2) {
@@ -34,6 +35,14 @@ function Home() {
         console.log(tags);
     }, [tags]);
 
+    const handleClickOnTag = (value: string, tagList: Array<string>) => {
+        if (selectedTags)
+            //TODO
+            // setSelectedTags();
+            //Add to selectedTag
+            console.log(value, tagList);
+    };
+
     return (
         <>
             <div className={styles.home}>
@@ -43,18 +52,27 @@ function Home() {
                         placeholder="Ingrédients"
                         color="blue"
                         tags={tags.ingredients}
+                        handleClickOnTag={(value) =>
+                            handleClickOnTag(value, tags.ingredients)
+                        }
                     />
 
                     <TagSelect
                         placeholder="Appareils"
                         color="green"
-                        tags={tags?.appliance}
+                        tags={tags.appliance}
+                        handleClickOnTag={(value) =>
+                            handleClickOnTag(value, tags.appliance)
+                        }
                     />
 
                     <TagSelect
                         placeholder="Ustensiles"
                         color="red"
-                        tags={tags?.ustensils}
+                        tags={tags.ustensils}
+                        handleClickOnTag={(value) =>
+                            handleClickOnTag(value, tags.ustensils)
+                        }
                     />
                 </div>
                 <Gallery recipes={filterRecipes} />

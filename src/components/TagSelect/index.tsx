@@ -8,9 +8,15 @@ type TagSelectProps = {
     placeholder: string;
     color?: string;
     tags: Array<string>;
+    handleClickOnTag: (value: string) => void;
 };
 
-function TagSelect({ placeholder, color = 'blue', tags }: TagSelectProps) {
+function TagSelect({
+    placeholder,
+    color = 'blue',
+    tags,
+    handleClickOnTag,
+}: TagSelectProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [currentTags, setCurrentTags] = useState<Array<string>>(tags);
     const [currentPlaceholder, setCurrentPlaceholder] = useState(placeholder);
@@ -27,18 +33,16 @@ function TagSelect({ placeholder, color = 'blue', tags }: TagSelectProps) {
         isOpen
             ? setCurrentPlaceholder(placeholder)
             : setCurrentPlaceholder(
-                  'Rechercher un '
-                      .concat(' ', singularize(placeholder).toLowerCase())
-                      .concat(' (', String(currentTags.length), ')')
+                  'Rechercher un '.concat(
+                      ' ',
+                      singularize(placeholder).toLowerCase()
+                  )
               );
-    };
-
-    const handleClickOnTag = (e: string) => {
-        console.log(e);
     };
 
     const handleInputChange = (search: string) => {
         if (search.length > 2) {
+            setIsOpen(true);
             setCurrentTags(
                 tags.filter((tag) => tag.includes(search.toLowerCase()))
             );
