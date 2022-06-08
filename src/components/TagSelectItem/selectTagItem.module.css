@@ -1,9 +1,9 @@
-.tag {
+.selectTagItem {
     color: white;
     cursor: pointer;
     font-size: 18px;
 }
 
-.tag:hover {
+.selectTagItem:hover {
     text-decoration: underline;
 }

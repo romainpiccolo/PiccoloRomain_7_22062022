@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './tagselect.module.css';
 import TagSelectCaret from '../TagSelectCaret';
-import Tag from '../Tag';
+import TagSelectItem from '../TagSelectItem';
 import { singularize } from '../../helper/string';
 
 type TagSelectProps = {
@@ -78,7 +78,7 @@ function TagSelect({
 
                 <div className={tagListClass}>
                     {currentTags.map((tag, index) => (
-                        <Tag
+                        <TagSelectItem
                             key={index}
                             value={tag}
                             handleClick={handleClickOnTag}
