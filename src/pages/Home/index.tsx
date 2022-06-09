@@ -8,13 +8,17 @@ import IRecipe from '../../Interface/IRecipe';
 import ITags from '../../Interface/ITags';
 import { filterRecipesByNameDescriptionAndIngredients } from '../../helper/filter';
 import { extractTagsFromResults, getCachedTags } from '../../helper/tags';
+import { toggleValueInArray } from '../../helper/array';
+import TagList from '../../components/TagList';
 
 function Home() {
     const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
     const [search, setSearch] = useState<string>('');
     const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
     const [tags, setTags] = useState<ITags>(defaultTags);
-    const [selectedTags, setSelectedTags] = useState([]);
+    const [IngredientTag, setIngredientTag] = useState<string[]>([]);
+    const [ApplianceTag, setApplianceTag] = useState<string[]>([]);
+    const [UstensilTag, setUstensilTag] = useState<string[]>([]);
 
     useEffect(() => {
         if (search.length > 2) {
@@ -32,47 +36,63 @@ function Home() {
     }, [search, defaultTags]);
 
     useEffect(() => {
-        console.log(tags);
-    }, [tags]);
+        console.log(IngredientTag, ApplianceTag, UstensilTag);
+    }, [tags, IngredientTag, ApplianceTag, UstensilTag]);
 
-    const handleClickOnTag = (value: string, tagList: Array<string>) => {
-        if (selectedTags)
-            //TODO
-            // setSelectedTags();
-            //Add to selectedTag
-            console.log(value, tagList);
+    const handleClickOnIngredientTag = (value: string) => {
+        setIngredientTag(toggleValueInArray(IngredientTag, value));
+    };
+
+    const handleClickOnApplianceTag = (value: string) => {
+        setApplianceTag(toggleValueInArray(ApplianceTag, value));
+    };
+
+    const handleClickOnUstensilTag = (value: string) => {
+        setUstensilTag(toggleValueInArray(UstensilTag, value));
     };
 
     return (
         <>
             <div className={styles.home}>
                 <SearchInput setSearch={setSearch} />
+                <TagList
+                    list={IngredientTag}
+                    color="blue"
+                    handleClickOnTag={handleClickOnIngredientTag}
+                />
+
+                <TagList
+                    list={ApplianceTag}
+                    color="green"
+                    handleClickOnTag={handleClickOnApplianceTag}
+                />
+
+                <TagList
+                    list={UstensilTag}
+                    color="red"
+                    handleClickOnTag={handleClickOnUstensilTag}
+                />
+
                 <div className={styles.tagSelectWrapper}>
                     <TagSelect
                         placeholder="Ingrédients"
                         color="blue"
                         tags={tags.ingredients}
-                        handleClickOnTag={(value) =>
-                            handleClickOnTag(value, tags.ingredients)
-                        }
+                        handleClickOnTag={handleClickOnIngredientTag}
                     />
 
                     <TagSelect
                         placeholder="Appareils"
                         color="green"
                         tags={tags.appliance}
-                        handleClickOnTag={(value) =>
-                            handleClickOnTag(value, tags.appliance)
-                        }
+                        handleClickOnTag={handleClickOnApplianceTag}
                     />
 
                     <TagSelect
                         placeholder="Ustensiles"
                         color="red"
                         tags={tags.ustensils}
-                        handleClickOnTag={(value) =>
-                            handleClickOnTag(value, tags.ustensils)
-                        }
+                        handleClickOnTag={handleClickOnUstensilTag}
                     />
                 </div>
                 <Gallery recipes={filterRecipes} />

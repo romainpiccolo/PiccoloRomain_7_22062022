@@ -1,0 +1,24 @@
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    border-radius: 5px;
+    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+    width: fit-content;
+    font-weight: 700;
+}
+
+.removeIcon {
+    cursor: pointer;
+}
+
+.blue {
+    background-color: var(--primary-button);
+}
+.green {
+    background-color: var(--secondary-button);
+}
+.red {
+    background-color: var(--tertiary-button);
+}
