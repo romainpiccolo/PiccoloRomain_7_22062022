@@ -12,9 +12,9 @@ import { toggleValueInArray } from '../../helper/array';
 import TagList from '../../components/TagList';
 
 function Home() {
+    const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
     const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
     const [search, setSearch] = useState<string>('');
-    const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
     const [tags, setTags] = useState<ITags>(defaultTags);
     const [IngredientTag, setIngredientTag] = useState<string[]>([]);
     const [ApplianceTag, setApplianceTag] = useState<string[]>([]);
@@ -78,6 +78,7 @@ function Home() {
                         placeholder="Ingrédients"
                         color="blue"
                         tags={tags.ingredients}
+                        selected={IngredientTag}
                         handleClickOnTag={handleClickOnIngredientTag}
                     />
 
@@ -85,6 +86,7 @@ function Home() {
                         placeholder="Appareils"
                         color="green"
                         tags={tags.appliance}
+                        selected={ApplianceTag}
                         handleClickOnTag={handleClickOnApplianceTag}
                     />
 
@@ -92,6 +94,7 @@ function Home() {
                         placeholder="Ustensiles"
                         color="red"
                         tags={tags.ustensils}
+                        selected={UstensilTag}
                         handleClickOnTag={handleClickOnUstensilTag}
                     />
                 </div>

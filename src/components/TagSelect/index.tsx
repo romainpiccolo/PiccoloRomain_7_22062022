@@ -8,6 +8,7 @@ type TagSelectProps = {
     placeholder: string;
     color?: string;
     tags: Array<string>;
+    selected: Array<string>;
     handleClickOnTag: (value: string) => void;
 };
 
@@ -15,6 +16,7 @@ function TagSelect({
     placeholder,
     color = 'blue',
     tags,
+    selected,
     handleClickOnTag,
 }: TagSelectProps) {
     const [isOpen, setIsOpen] = useState(false);
@@ -77,13 +79,17 @@ function TagSelect({
                 </div>
 
                 <div className={tagListClass}>
-                    {currentTags.map((tag, index) => (
-                        <TagSelectItem
-                            key={index}
-                            value={tag}
-                            handleClick={handleClickOnTag}
-                        />
-                    ))}
+                    {currentTags.map((tag, index) =>
+                        !selected.includes(tag) ? (
+                            <TagSelectItem
+                                key={index}
+                                value={tag}
+                                handleClick={handleClickOnTag}
+                            />
+                        ) : (
+                            <></>
+                        )
+                    )}
                 </div>
             </div>
         </>
