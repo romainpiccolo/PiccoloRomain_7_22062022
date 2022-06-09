@@ -6,7 +6,10 @@ import { useEffect, useState } from 'react';
 import Gallery from '../../components/Gallery';
 import IRecipe from '../../Interface/IRecipe';
 import ITags from '../../Interface/ITags';
-import { filterRecipesByNameDescriptionAndIngredients } from '../../helper/filter';
+import {
+    filterRecipesByNameDescriptionAndIngredients,
+    filterByTags,
+} from '../../helper/filter';
 import { extractTagsFromResults, getCachedTags } from '../../helper/tags';
 import { toggleValueInArray } from '../../helper/array';
 import TagList from '../../components/TagList';
@@ -14,6 +17,7 @@ import TagList from '../../components/TagList';
 function Home() {
     const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
     const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
+    const [filterTagRecipes, setFilterTagRecipes] = useState<IRecipe[]>([]);
     const [search, setSearch] = useState<string>('');
     const [tags, setTags] = useState<ITags>(defaultTags);
     const [IngredientTag, setIngredientTag] = useState<string[]>([]);
@@ -28,15 +32,32 @@ function Home() {
             );
 
             setFilterRecipes(result);
+            setFilterTagRecipes(result);
             setTags(extractTagsFromResults(result));
         } else {
             setFilterRecipes(recipes);
+            setFilterTagRecipes(recipes);
             setTags(defaultTags);
         }
     }, [search, defaultTags]);
 
     useEffect(() => {
-        console.log(filterRecipes);
+        if (
+            !IngredientTag.length &&
+            !ApplianceTag.length &&
+            !UstensilTag.length
+        ) {
+            setFilterTagRecipes(filterRecipes);
+        } else {
+            setFilterTagRecipes(
+                filterByTags(
+                    filterRecipes,
+                    IngredientTag,
+                    ApplianceTag,
+                    UstensilTag
+                )
+            );
+        }
     }, [IngredientTag, ApplianceTag, UstensilTag]);
 
     const handleClickOnIngredientTag = (value: string) => {
@@ -98,7 +119,7 @@ function Home() {
                         handleClickOnTag={handleClickOnUstensilTag}
                     />
                 </div>
-                <Gallery recipes={filterRecipes} />
+                <Gallery recipes={filterTagRecipes} />
             </div>
         </>
     );
