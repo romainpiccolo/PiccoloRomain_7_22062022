@@ -86,9 +86,7 @@ function TagSelect({
                                 value={tag}
                                 handleClick={handleClickOnTag}
                             />
-                        ) : (
-                            <></>
-                        )
+                        ) : null
                     )}
                 </div>
             </div>

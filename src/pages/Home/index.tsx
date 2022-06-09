@@ -36,8 +36,8 @@ function Home() {
     }, [search, defaultTags]);
 
     useEffect(() => {
-        console.log(IngredientTag, ApplianceTag, UstensilTag);
-    }, [tags, IngredientTag, ApplianceTag, UstensilTag]);
+        console.log(filterRecipes);
+    }, [IngredientTag, ApplianceTag, UstensilTag]);
 
     const handleClickOnIngredientTag = (value: string) => {
         setIngredientTag(toggleValueInArray(IngredientTag, value));

@@ -21,9 +21,7 @@ function TagList({ list, color, handleClickOnTag }: TagListProps) {
                         />
                     ))}
                 </div>
-            ) : (
-                <></>
-            )}
+            ) : null}
         </>
     );
 }
