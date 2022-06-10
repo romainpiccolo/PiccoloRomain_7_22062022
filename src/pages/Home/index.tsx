@@ -58,7 +58,7 @@ function Home() {
                 )
             );
         }
-    }, [IngredientTag, ApplianceTag, UstensilTag]);
+    }, [IngredientTag, ApplianceTag, UstensilTag, filterRecipes]);
 
     const handleClickOnIngredientTag = (value: string) => {
         setIngredientTag(toggleValueInArray(IngredientTag, value));
