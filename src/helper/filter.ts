@@ -20,12 +20,9 @@ const filterRecipesByNameDescriptionAndIngredients = (filterRecipes: IRecipe[], 
 }
 
 const extractIngredientFromRecipe = (ingredientList: IRecipeIngredient[]) => {
-    const ingredients: string[] = []
-    ingredientList.map(item => {
-        ingredients.push(item.ingredient.toLowerCase())
-    })
-
-    return ingredients
+    return ingredientList.reduce<string[]>((accumulator, current) => {
+        return [...accumulator, current.ingredient.toLowerCase()]
+    }, [])
 }
 
 const filterRecipesByIngredient = (filterRecipes: IRecipe[], ingredientList: Array<string>) => {

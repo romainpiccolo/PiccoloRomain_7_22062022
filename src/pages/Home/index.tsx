@@ -1,7 +1,7 @@
 import TagSelect from '../../components/TagSelect';
 import SearchInput from '../../components/SearchInput';
 import styles from './home.module.css';
-import { recipes } from '../../datas/recipes';
+import { recipes as recipesData } from '../../datas/recipes';
 import { useEffect, useState } from 'react';
 import Gallery from '../../components/Gallery';
 import IRecipe from '../../Interface/IRecipe';
@@ -15,8 +15,8 @@ import { toggleValueInArray } from '../../helper/array';
 import TagList from '../../components/TagList';
 
 function Home() {
-    const [defaultTags] = useState<ITags>(() => getCachedTags(recipes));
-    const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipes);
+    const [defaultTags] = useState<ITags>(() => getCachedTags(recipesData));
+    const [filterRecipes, setFilterRecipes] = useState<IRecipe[]>(recipesData);
     const [filterTagRecipes, setFilterTagRecipes] = useState<IRecipe[]>([]);
     const [search, setSearch] = useState<string>('');
     const [tags, setTags] = useState<ITags>(defaultTags);
@@ -25,40 +25,35 @@ function Home() {
     const [UstensilTag, setUstensilTag] = useState<string[]>([]);
 
     useEffect(() => {
-        if (search.length > 2) {
-            const result = filterRecipesByNameDescriptionAndIngredients(
-                recipes,
-                search
-            );
+        let result =
+            search.length > 2
+                ? filterRecipesByNameDescriptionAndIngredients(
+                      recipesData,
+                      search
+                  )
+                : recipesData;
 
-            setFilterRecipes(result);
-            setFilterTagRecipes(result);
-            setTags(extractTagsFromResults(result));
-        } else {
-            setFilterRecipes(recipes);
-            setFilterTagRecipes(recipes);
-            setTags(defaultTags);
-        }
+        let tags =
+            search.length > 2 ? extractTagsFromResults(result) : defaultTags;
+
+        setFilterRecipes(result);
+        setFilterTagRecipes(result);
+        setTags(tags);
     }, [search, defaultTags]);
 
     useEffect(() => {
-        if (
-            !IngredientTag.length &&
-            !ApplianceTag.length &&
-            !UstensilTag.length
-        ) {
-            setFilterTagRecipes(filterRecipes);
-        } else {
-            setFilterTagRecipes(
-                filterByTags(
-                    filterRecipes,
-                    IngredientTag,
-                    ApplianceTag,
-                    UstensilTag
-                )
-            );
-        }
-    }, [IngredientTag, ApplianceTag, UstensilTag, filterRecipes]);
+        const filteredRecipes =
+            !IngredientTag.length && !ApplianceTag.length && !UstensilTag.length
+                ? filterRecipes
+                : filterByTags(
+                      filterRecipes,
+                      IngredientTag,
+                      ApplianceTag,
+                      UstensilTag
+                  );
+
+        setFilterTagRecipes(filteredRecipes);
+    }, [search, IngredientTag, ApplianceTag, UstensilTag, filterRecipes]);
 
     const handleClickOnIngredientTag = (value: string) => {
         setIngredientTag(toggleValueInArray(IngredientTag, value));
