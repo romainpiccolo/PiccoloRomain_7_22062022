@@ -25,7 +25,7 @@ function Home() {
     const [UstensilTag, setUstensilTag] = useState<string[]>([]);
 
     useEffect(() => {
-        let result =
+        const result =
             search.length > 2
                 ? filterRecipesByNameDescriptionAndIngredients(
                       recipesData,
@@ -33,7 +33,7 @@ function Home() {
                   )
                 : recipesData;
 
-        let tags =
+        const tags =
             search.length > 2 ? extractTagsFromResults(result) : defaultTags;
 
         setFilterRecipes(result);
