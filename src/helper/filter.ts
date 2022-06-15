@@ -9,16 +9,19 @@ const checkInIngredient = (recipe: IRecipe, lowerSearch: string) => {
 
 const filterRecipesByNameDescriptionAndIngredients = (filterRecipes: IRecipe[], search: string) => {
     const lowerSearch = search.toLowerCase();
+    const result = [];
 
-    //TODO native
+    for (const recipe of filterRecipes) {
+        const isInRecipeName = recipe.name.toLowerCase().includes(lowerSearch);
+        const isInRecipeDescription = recipe.description.toLowerCase().includes(lowerSearch);
+        const isInIngredient = checkInIngredient(recipe, lowerSearch)
 
-    return filterRecipes.filter(recipe => {
-        return (
-            recipe.name.toLowerCase().includes(lowerSearch) ||
-            recipe.description.toLowerCase().includes(lowerSearch) ||
-            checkInIngredient(recipe, lowerSearch)
-        )
-    })
+        if (isInRecipeName || isInRecipeDescription || isInIngredient) {
+            result.push(recipe)
+        }
+    }
+
+    return result
 }
 
 const extractIngredientFromRecipe = (ingredientList: IRecipeIngredient[]) => {
