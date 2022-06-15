@@ -2,9 +2,14 @@ import IRecipe from "../Interface/IRecipe";
 import IRecipeIngredient from "../Interface/IRecipeIngredient";
 
 const checkInIngredient = (recipe: IRecipe, lowerSearch: string) => {
-    return recipe.ingredients.filter(item => {
-        return item.ingredient.toLowerCase().includes(lowerSearch)
-    }).length > 0
+    for (const item of recipe.ingredients) {
+        for (const ingredient of item.ingredient) {
+            if (ingredient.toLowerCase() === lowerSearch) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 const filterRecipesByNameDescriptionAndIngredients = (filterRecipes: IRecipe[], search: string) => {
@@ -12,7 +17,7 @@ const filterRecipesByNameDescriptionAndIngredients = (filterRecipes: IRecipe[], 
     const result = [];
 
     for (const recipe of filterRecipes) {
-        const isInRecipeName = recipe.name.toLowerCase().includes(lowerSearch);
+        const isInRecipeName = recipe.name.toLowerCase().includes(lowerSearch)
         const isInRecipeDescription = recipe.description.toLowerCase().includes(lowerSearch);
         const isInIngredient = checkInIngredient(recipe, lowerSearch)
 
