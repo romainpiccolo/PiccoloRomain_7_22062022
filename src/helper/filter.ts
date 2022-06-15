@@ -10,6 +10,8 @@ const checkInIngredient = (recipe: IRecipe, lowerSearch: string) => {
 const filterRecipesByNameDescriptionAndIngredients = (filterRecipes: IRecipe[], search: string) => {
     const lowerSearch = search.toLowerCase();
 
+    //TODO native
+
     return filterRecipes.filter(recipe => {
         return (
             recipe.name.toLowerCase().includes(lowerSearch) ||
