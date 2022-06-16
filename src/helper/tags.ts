@@ -2,6 +2,11 @@ import IRecipe from "../Interface/IRecipe";
 import IRecipeIngredient from "../Interface/IRecipeIngredient";
 import ITags from "../Interface/ITags";
 
+/**
+ * 
+ * @param tags An object with 3 type of tags (ingredients, appliances, ustensils)
+ * @returns An object sanitize with no duplicate
+ */
 const sanitizeTags = (tags: ITags): ITags => {
     const sanitizeIngredients = tags.ingredients.map(ingredient => ingredient.toLowerCase());
     const sanitizeAppliance = tags.appliance.map(appliance => appliance.toLowerCase());
@@ -15,6 +20,11 @@ const sanitizeTags = (tags: ITags): ITags => {
     }
 }
 
+/**
+ * 
+ * @param ingredients An object of ingredient, quantity and unit
+ * @returns An array that includes the ingredient tags
+ */
 const extractIngredientTags = (ingredients: IRecipeIngredient[]) => {
     const ingredientList: Array<string> = []
     ingredients.forEach(item => {
@@ -24,6 +34,11 @@ const extractIngredientTags = (ingredients: IRecipeIngredient[]) => {
     return ingredientList;
 }
 
+/**
+ * 
+ * @param filterRecipes An array of recipe
+ * @returns An object sanitize with no duplicate
+ */
 const extractTagsFromResults = (filterRecipes: IRecipe[]): ITags => {
     const tags: ITags = {
         ingredients: [],
@@ -40,6 +55,11 @@ const extractTagsFromResults = (filterRecipes: IRecipe[]): ITags => {
     return sanitizeTags(tags);
 }
 
+/**
+ * 
+ * @param recipes An array of recipe
+ * @returns A list of tags
+ */
 const getCachedTags = (recipes: IRecipe[]) => {
     const cachedTags = localStorage.getItem('tags');
     const defaultTags =
