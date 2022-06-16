@@ -52,7 +52,9 @@ function Home() {
                       UstensilTag
                   );
 
+        const tags = extractTagsFromResults(filteredRecipes);
         setFilterTagRecipes(filteredRecipes);
+        setTags(tags);
     }, [search, IngredientTag, ApplianceTag, UstensilTag, filterRecipes]);
 
     const handleClickOnIngredientTag = (value: string) => {
