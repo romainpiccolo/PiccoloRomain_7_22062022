@@ -1,5 +1,5 @@
 /**
- * 
+ * A function that toggle the value in array.
  * @param array An array of string
  * @param value The value you wish to toggle
  * @returns A sorted array with the value add or remove

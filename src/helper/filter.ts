@@ -2,7 +2,7 @@ import IRecipe from "../Interface/IRecipe";
 import IRecipeIngredient from "../Interface/IRecipeIngredient";
 
 /**
- * 
+ * A function to check if an ingredient is in a recipe
  * @param recipe A recipe
  * @param lowerSearch An ingredient you're looking for into the recipe (Lowercase)
  * @returns A boolean if the ingredient is in the recipe or not
@@ -14,7 +14,7 @@ const checkInIngredient = (recipe: IRecipe, lowerSearch: string) => {
 }
 
 /**
- * 
+ * A function that found the recipe with the name or description or ingredient you're looking for.
  * @param filterRecipes An array of recipe
  * @param search The input you're looking for. Must be include into name, description or ingredients list
  * @returns A new array with the recipe that match the search input
@@ -32,7 +32,7 @@ const filterRecipesByNameDescriptionAndIngredients = (filterRecipes: IRecipe[], 
 }
 
 /**
- * 
+ * A function that extract ingredients from a recipe
  * @param ingredientList An array of object with ingredient in each object
  * @returns An array of ingredient
  */
@@ -43,7 +43,7 @@ const extractIngredientFromRecipe = (ingredientList: IRecipeIngredient[]) => {
 }
 
 /**
- * 
+ * A function that found the recipe with the ingredient you're looking for.
  * @param filterRecipes An array of recipe
  * @param ingredientList An array of ingredient you're looking for
  * @returns A new array of filter recipes
@@ -57,7 +57,7 @@ const filterRecipesByIngredient = (filterRecipes: IRecipe[], ingredientList: Arr
 }
 
 /**
- * 
+ * A function that found the recipe with the appliance you're looking for.
  * @param filterRecipes An array of recipe
  * @param applianceList An array of appliance you're looking for
  * @returns A new array of filter recipes
@@ -74,7 +74,7 @@ const filterRecipesByAppliance = (filterRecipes: IRecipe[], applianceList: Array
 }
 
 /**
- * 
+ * A function that found the recipe with the ustensil you're looking for.
  * @param filterRecipes An array of recipe
  * @param ustensilList An array of ustensil you're looking for
  * @returns A new array of filter recipes
@@ -91,7 +91,7 @@ const filterRecipesByUstensil = (filterRecipes: IRecipe[], ustensilList: Array<s
 }
 
 /**
- * 
+ * A function that found the recipe with the filter you're looking for.
  * @param filterRecipes An array of recipe
  * @param ingredientList An array of ingredient you're looking for
  * @param applianceList An array of appliance you're looking for

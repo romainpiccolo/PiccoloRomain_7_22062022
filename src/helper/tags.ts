@@ -3,7 +3,7 @@ import IRecipeIngredient from "../Interface/IRecipeIngredient";
 import ITags from "../Interface/ITags";
 
 /**
- * 
+ * A function that sanitize the tags (lowercase and remove duplicated)
  * @param tags An object with 3 type of tags (ingredients, appliances, ustensils)
  * @returns An object sanitize with no duplicate
  */
@@ -21,7 +21,7 @@ const sanitizeTags = (tags: ITags): ITags => {
 }
 
 /**
- * 
+ * A function that extract the ingredient tags from a list of ingredients.
  * @param ingredients An object of ingredient, quantity and unit
  * @returns An array that includes the ingredient tags
  */
@@ -35,7 +35,7 @@ const extractIngredientTags = (ingredients: IRecipeIngredient[]) => {
 }
 
 /**
- * 
+ * A function that extract all tags from a list of recipes.
  * @param filterRecipes An array of recipe
  * @returns An object sanitize with no duplicate
  */
@@ -56,7 +56,7 @@ const extractTagsFromResults = (filterRecipes: IRecipe[]): ITags => {
 }
 
 /**
- * 
+ * A function that get tags in localStorage or extract them from the main results.
  * @param recipes An array of recipe
  * @returns A list of tags
  */
